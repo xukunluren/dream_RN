@@ -20,6 +20,7 @@ import {
 
 } from 'react-native-tableview-simple';
 import NavigationBar from 'react-native-navbar';
+import SecondPageCell from './SecondPageCell'
 
 
 export default class SecondPage extends Component{
@@ -52,7 +53,7 @@ export default class SecondPage extends Component{
                 statusBar={statusBar}
                 style={styles.tabBarColor}
               />
-
+               <SecondPageCell/>
           </View>
         );
 

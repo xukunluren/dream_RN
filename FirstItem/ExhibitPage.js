@@ -28,19 +28,42 @@ export default class ExhibitPage extends Component{
         super(props);
         // 初始状态
         this.state = {
-            uri:'http://202.121.66.52:8010/uploads/museum/image/8/1303978825.jpg',
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+            }),
+            uri:'http://202.121.66.52:8010/items',
+
         };
       }
 
+
     componentDidMount() {
-        this.setState({
-            uri:'http://202.121.66.52:8010'+this.props.imageUrl,
-        });
-    };
+
+        fetch('http://202.121.66.52:8010/items/museum/'+this.props.id,{
+                method:'GET',
+        }).then((response) => response.json())
+          .then((responseData)=>{
+              jsonDataArr = responseData
+              this.setState({
+                  jsonData:responseData,
+                  dataSource:this.state.dataSource.cloneWithRows(responseData),
+                  loaded:true
+              })
+              }).catch(err=>{
+            ()=>alert("数据请求出错");
+        })
+        };
+
     popToFirstPage(){
         this.props.navigator.pop();
     };
-
+    _renderRow(rowData, sectionID, rowID){
+        return(
+          <TouchableOpacity onPress={()=>this._onPressButton(rowData.name,rowData)}>
+              <ItemListView itemsData = {rowData} source={{uri:'http://202.121.66.52:8010'+rowData.image.logo.url,}} style={{flex:1}}/>
+          </TouchableOpacity>
+        )
+    }
     render(){
         var titleConfig = {
             title:'场馆简介',
@@ -59,15 +82,19 @@ export default class ExhibitPage extends Component{
             fontSize:8,
         };
         return(
-    <View style={{flex:1}}>
-        <NavigationBar
-          statusBar={statusBar}
-          style={styles.tabBarColor}
-          leftButton = {leftButton}
+          <View style={{flex:1}}>
+                <NavigationBar
+                  statusBar={statusBar}
+                  style={styles.tabBarColor}
+                  leftButton = {leftButton}
+                />
+
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow.bind(this)}
+          style={{backgroundColor: '#F5FCFF',}}
         />
-        <View style={{height:100}}>
-             <ItemListView style={{flex:1}}/>
-        </View>
+
     </View>
 
         );

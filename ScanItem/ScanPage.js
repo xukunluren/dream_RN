@@ -35,7 +35,7 @@ export default class ScanPage extends Component{
 
 
         var titleConfig = {
-            title: '梦之园',
+            title: '扫一扫',
             tintColor:'white',
             fontsize:'30'
         };

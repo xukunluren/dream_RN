@@ -30,7 +30,7 @@ import TabNavigator from 'react-native-tab-navigator';
 
 const tabBarItems = [
     { title: '梦之园', icon: () => <Image style={{ width: 22, height: 22 }} source={require('./../studentStudyReact/images/home.png')}/>, component: FirstPage },
-    { title: '乐活动', icon: () => <Image style={{ width: 22, height: 22 }} source={require('./../studentStudyReact/images/eweekly.png')}/>, component: ScanPage },
+    { title: '乐活动', icon: () => <Image style={{ width: 22, height: 22 }} source={require('./../studentStudyReact/images/eweekly.png')}/>, component: SecondPage },
     { title: '扫一扫', icon: () => <Image style={{ width: 22, height: 22 }} source={require('./../studentStudyReact/images/code.png')}/>, component: ScanPage },
     { title: 'E周刊', icon: () => <Image style={{ width: 22, height: 22 }} source={require('./../studentStudyReact/images/shopping.png')}/>, component: ThidPage },
     { title: '我的', icon: () => <Image style={{ width: 22, height: 22 }} source={require('./../studentStudyReact/images/mysetting.png')}/>, component: FourthPage },

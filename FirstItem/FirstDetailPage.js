@@ -64,8 +64,8 @@ export default class FirstDetailPage extends Component{
             component:ExhibitPage,
             params:{
                 title:this.props.name,
-                imageUrl:this.props.rowData.info_image.url,
-                dec:this.props.rowData.info
+                id:this.props.rowData.id
+
             }
         })
     };
