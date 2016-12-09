@@ -40,6 +40,8 @@ export default class FirstDetailPage extends Component{
         };
       };
 
+
+
     componentDidMount() {
 
         this.setState({
@@ -48,6 +50,9 @@ export default class FirstDetailPage extends Component{
             url:'http://202.121.66.52:8010'+this.props.rowData.image.url,
         })
     };
+
+
+
 
     componentWillMount() {
 

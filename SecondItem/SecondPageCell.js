@@ -35,6 +35,7 @@ export default class SecondPageCell extends Component{
         });
 
 
+
     }
     render(){
         // var imageURL = this.state.url+this.props.museumData.coverimage.url;
@@ -42,25 +43,25 @@ export default class SecondPageCell extends Component{
           <View style={styles.contain}>
               <View style={{alignItems:'center'}}>
                   <View style={styles.dateTextView}>
-                      <Text style={styles.dateText}>2016-08-16</Text>
+                      <Text style={styles.dateText}>{this.props.itemData.content}</Text>
                   </View>
               </View>
               <View style={styles.topView}>
                   <View style={{alignItems:'center'}}>
                   <Image
-                    source={{ uri:'http://202.121.66.52:8010/uploads/plant/image/4/003-3.jpg'}}
+                    source={{ uri:this.props.itemData.cover}}
                     indicator={ProgressBar.Pie}
                     style={styles.imageView}
                   >
                       <View style={{justifyContent:'center',backgroundColor:'black',
                           opacity:0.7,height:50}}>
-                      <Text style={styles.imageText}>荷花展</Text>
+                      <Text style={styles.imageText}>{this.props.itemData.name}</Text>
                       </View>
                     </Image>
                       </View>
                   <View style={{flex:1}}>
-                      <Text style={styles.titleText}>        行高高 测试行高行高行高高 测试行高高 测试行高行高高 测试行高高 测试行高行高高 测试行高高 测试行高 </Text>
-                      <Text style={styles.decText}>--顾村公园</Text>
+                      <Text style={styles.titleText}> {this.props.itemData.description}</Text>
+                      <Text style={styles.decText}>--{this.props.itemData.museum.name}</Text>
                   </View>
               </View>
           </View>
@@ -71,7 +72,7 @@ export default class SecondPageCell extends Component{
 const styles = StyleSheet.create({
      contain:{
          flex:1,
-         padding:0,
+         paddingTop:10,
          height:300,
          backgroundColor:'#E0E0E0'
 
@@ -80,11 +81,11 @@ const styles = StyleSheet.create({
          justifyContent:'center',
          alignItems:'center',
          height:17,
-         width:85,
-        backgroundColor:'#6d6d6d',
+         width:95,
+        backgroundColor:'gray',
         borderRadius:5,
         margin:5,
-        fontSize:10
+
     },
     dateText:{
         flex:1,
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
 
     },
     topView:{
-         height:Dimensions.get('window').height*0.41,
+         height:Dimensions.get('window').height*0.42,
          backgroundColor:'white',
          borderRadius:5,
         // justifyContent:'center',
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     },
     imageView:{
 
-        height:Dimensions.get('window').height*0.31,
+        height:Dimensions.get('window').height*0.28,
         width:Dimensions.get('window').width-20 ,
         margin:5,
         // padding:5,
@@ -125,8 +126,8 @@ const styles = StyleSheet.create({
         backgroundColor:'white'
     },
     titleText:{
-        flex:2,
-        fontSize:14,
+        flex:1,
+        fontSize:12,
         color:'black',
         paddingLeft:8,
         paddingRight:5,
@@ -134,10 +135,12 @@ const styles = StyleSheet.create({
     },
     decText:{
         flex:1,
-        fontSize:14,
+        fontSize:12,
         color:'black',
         paddingLeft:5,
-        textAlign:'right'
+        textAlign:'right',
+        margin:3
+
     },
     addressText:{
         flex:1,

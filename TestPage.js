@@ -17,53 +17,48 @@ import {
 } from 'react-native';
 import FirstDetailPage from './FirstItem/FirstDetailPage'
 import MuseumDesc from './FirstItem/MuseumDesc'
+import NavigationBar from 'react-native-navbar';
 
 
 export default class TestPage extends Component{
-    // 构造
-      constructor(props) {
-          super(props);
-          // 初始状态
-          this.state = {
-              dataSource: new ListView.DataSource({
-                  rowHasChanged: (row1, row2) => row1 !== row2,
-              }),
-              loaded: false,
-          };
-      }
-    componentDidMount() {
-        fetch('http://202.121.66.52:8010/museums',{
-            method:'GET',
-        }).then((response) => response.json())
-          .then((responseData)=>{
-              jsonDataArr = responseData
 
-              this.setState({
-                  jsonData:responseData,
-                  dataSource:this.state.dataSource.cloneWithRows(responseData),
-                  loaded:true
-
-              })
-          })
-          .catch(err=>{
-              ()=>alert("数据请求出错");
-          })
-    }
     render(){
-        let defaultName = 'MuseumDesc';
-        let defaultComponent = MuseumDesc;
+        var titleConfig = {
+            title:this.props.name,
+            tintColor:'white',
+            fontSize:16
+        };
+        var statusBar = {
+            tintColor:'rgba(67, 148, 247, 1)',
+
+        };
+
+        var leftButton ={
+            title:'< 梦之园',
+            handler: ()=>{  this.props.navigator.pop();},
+            tintColor:'white',
+            fontSize:12
+        };
         return(
-          <Navigator
-            style={{flex:1}}
-            initialRoute={{name:defaultName,component:defaultComponent}}
-            configureScene = {this.configureScene}
-            renderScene={(route, navigator) => {
-                let Component = route.component;
-                if(route.component) {
-                    return <Component {...route.params} navigator={navigator} />
-                }
-            }} >
-              ></Navigator>
+          <View style={{ flex: 1 }}>
+          <NavigationBar
+            title={titleConfig}
+            statusBar={statusBar}
+            style={styles.tabBarColor}
+            leftButton = {leftButton}
+          />
+              <View><Text>nihao</Text></View>
+          </View>
         );
     }
 }
+const styles = StyleSheet.create({
+    stage: {
+        backgroundColor: '#EFEFF4',
+        paddingBottom: 20,
+        flex: 1
+    },
+    tabBarColor:{
+        backgroundColor:'rgba(67, 148, 247, 1)',
+    },
+});

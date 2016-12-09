@@ -10,7 +10,9 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView
+  ScrollView,
+  ListView,
+  TouchableOpacity
 } from 'react-native';
 import {
   Cell,
@@ -29,8 +31,50 @@ export default class SecondPage extends Component{
         super(props);
         // 初始状态
         this.state = {
-            title:this.props.title
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+            }),
+            title:this.props.title,
+            loaded:false
         };
+    }
+
+    componentDidMount() {
+        fetch('http://202.121.66.52:8010/event',{
+            method:'GET',
+        }).then((response) => response.json())
+          .then((responseData)=>{
+              // jsonDataArr = responseData
+
+              this.setState({
+                  // jsonData:responseData,
+                  dataSource:this.state.dataSource.cloneWithRows(responseData),
+                  loaded:true
+              })
+          })
+          .catch(err=>{
+              ()=>alert("数据请求出错");
+          })
+    }
+    _onPressButton(rowName,rowData){
+
+        const{navigator} = this.props;
+
+        // navigator.push({
+        //     name:'FirstDetailPage',
+        //     component:FirstDetailPage,
+        //     params:{
+        //         rowData:rowData,
+        //         name:rowName,
+        //     }
+        // })
+    };
+    _renderRow(rowData, sectionID, rowID){
+        return(
+          <TouchableOpacity onPress={()=>this._onPressButton(rowData.name,rowData)}>
+              <SecondPageCell itemData = {rowData}/>
+          </TouchableOpacity>
+        )
     }
     render(){
 
@@ -44,6 +88,8 @@ export default class SecondPage extends Component{
             tintColor:'rgba(67, 148, 247, 1)',
 
         };
+
+
         return(
           <View style={{ flex: 1 }}
           >
@@ -53,7 +99,12 @@ export default class SecondPage extends Component{
                 statusBar={statusBar}
                 style={styles.tabBarColor}
               />
-               <SecondPageCell/>
+              <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this._renderRow.bind(this)}
+                style={{backgroundColor: '#F5FCFF',}}
+              />
+
           </View>
         );
 

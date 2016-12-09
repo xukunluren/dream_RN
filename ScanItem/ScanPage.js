@@ -19,6 +19,7 @@ import {
   CustomCell
 
 } from 'react-native-tableview-simple';
+import  QRCodeScreen from './../QRCodeScreen'
 import NavigationBar from 'react-native-navbar';
 
 
@@ -31,11 +32,14 @@ export default class ScanPage extends Component{
             title:this.props.title
         };
     }
+    _onSucess(result) {
+        console.log(result);
+    };
     render(){
 
 
         var titleConfig = {
-            title: '扫一扫',
+            title: '梦之园',
             tintColor:'white',
             fontsize:'30'
         };
@@ -52,7 +56,7 @@ export default class ScanPage extends Component{
                 statusBar={statusBar}
                 style={styles.tabBarColor}
               />
-
+                 <QRCodeScreen/>
           </View>
         );
 

@@ -18,8 +18,9 @@
 {
   NSURL *jsCodeLocation;
 
-//  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-    jsCodeLocation = [NSURL URLWithString:@"http://172.16.1.160:8081/index.ios.bundle?platform=ios&dev=true"];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+//    jsCodeLocation = [NSURL URLWithString:@"http://172.16.1.160:8081/index.ios.bundle?platform=ios&dev=true"];
+//  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsboundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"studentStudyReact"
